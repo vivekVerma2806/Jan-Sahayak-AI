@@ -1,0 +1,19 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Database
+chroma_db/
+
+# Uploads
+uploads/*.pdf
+
+# IDE
+.vscode/
+.idea/
+
+# Streamlit secrets (never commit API keys!)
+.streamlit/secrets.toml
