@@ -19,7 +19,6 @@ uploads/*
 !uploads/.gitkeep
 
 # IDE & OS
-.vscode/
 .idea/
 .DS_Store
 *.log
