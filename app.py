@@ -1,4 +1,6 @@
 import os
+import textwrap
+
 # Fix protobuf compiler descriptor compatibility issues
 os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
 # Suppress transformers/tokenizers verbose startup warnings
@@ -130,7 +132,7 @@ TUTORIAL_VIDEOS = [
 ]
 
 # ===================== REFINED EDITORIAL NEWSPAPER STYLING =====================
-st.markdown("""
+st.markdown(textwrap.dedent("""
 <style>
     /* ===== Typography Import ===== */
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -541,7 +543,7 @@ st.markdown("""
         color: var(--text-main);
     }
 </style>
-""", unsafe_allow_html=True)
+"""), unsafe_allow_html=True)
 
 # Ensure folders exist
 utils.ensure_directories([UPLOAD_DIR, CHROMA_DIR])
@@ -577,12 +579,12 @@ if st.session_state.vector_db is None:
 
 # ===================== SIDEBAR (Publication Utility Rail) =====================
 with st.sidebar:
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div style="padding-top: 0.4rem;">
         <div class="sidebar-head">Utility Desk</div>
         <div class="sidebar-sub">System Registry & Ingestion</div>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
     
     st.markdown("---")
     
@@ -595,7 +597,7 @@ with st.sidebar:
         chunk_count = vector_store.get_chunk_count(st.session_state.vector_db)
     num_files = len(st.session_state.uploaded_files)
     
-    st.markdown(f"""
+    st.markdown(textwrap.dedent(f"""
     <div class="section-label">System Status</div>
     <div class="status-table">
         <div class="status-row">
@@ -619,7 +621,7 @@ with st.sidebar:
             <span class="status-value">{chunk_count}</span>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
     
     # API Key Input Override if needed
     if not API_KEY or st.session_state.api_key_override:
@@ -708,7 +710,7 @@ with st.sidebar:
 
 
 # ===================== MAIN NEWSPAPER MASTHEAD =====================
-st.markdown("""
+st.markdown(textwrap.dedent("""
 <div class="masthead-frame">
     <div class="masthead-meta">
         <span>PUBLIC POLICY RESEARCH DESK</span>
@@ -719,7 +721,7 @@ st.markdown("""
     <div class="masthead-descriptor">An independent digital gazette and grounded AI intelligence system for Indian government policy.</div>
     <div class="masthead-rules"></div>
 </div>
-""", unsafe_allow_html=True)
+"""), unsafe_allow_html=True)
 
 
 # ===================== TABS NAVIGATION =====================
@@ -735,7 +737,7 @@ with tab_chat:
     
     # Un-boxed Hero Section if no chat history
     if not st.session_state.chat_history and st.session_state.pending_question is None:
-        st.markdown("""
+        st.markdown(textwrap.dedent("""
         <div class="hero-container">
             <h2 class="hero-title">Grounded Artificial Intelligence for Public Policy Verification</h2>
             <div class="hero-deck">
@@ -764,7 +766,7 @@ with tab_chat:
                 </div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """), unsafe_allow_html=True)
         
         st.markdown('<div class="section-label">Suggested Reference Inquiries</div>', unsafe_allow_html=True)
         
@@ -788,19 +790,19 @@ with tab_chat:
     is_ready = bool(API_KEY) and chunk_count > 0
 
     if not API_KEY:
-        st.markdown("""
+        st.markdown(textwrap.dedent("""
         <div class="notice-box">
             <b>API KEY REQUIRED:</b> Please enter your Google Gemini API Key in the left Utility Desk to activate the inquiry desk.
         </div>
-        """, unsafe_allow_html=True)
+        """), unsafe_allow_html=True)
     elif num_files == 0:
-        st.markdown("""
+        st.markdown(textwrap.dedent("""
         <div class="notice-box">
             <b>ARCHIVE IS EMPTY:</b> No government scheme documents are currently indexed in the database.
             <br><br>
             <i>Upload policy PDFs using the Document Desk on the left, or generate the default reference schemes below.</i>
         </div>
-        """, unsafe_allow_html=True)
+        """), unsafe_allow_html=True)
         
         if st.button("Generate & Index Official Reference Schemes", type="primary", use_container_width=True):
             with st.spinner("Generating official reference PDFs..."):
@@ -819,13 +821,13 @@ with tab_chat:
                     st.error(f"Error creating assets: {str(e)}")
                     
     elif chunk_count == 0:
-        st.markdown("""
+        st.markdown(textwrap.dedent("""
         <div class="notice-box">
             <b>DOCUMENTS UNINDEXED:</b> PDF files exist in the uploads directory but have not been vectorized into ChromaDB.
             <br><br>
             Please click <b>"Process & Index Documents"</b> in the left Utility Desk.
         </div>
-        """, unsafe_allow_html=True)
+        """), unsafe_allow_html=True)
 
     # Active Inquiry Research Brief History
     if is_ready:
@@ -835,22 +837,22 @@ with tab_chat:
         # Render Research Brief History
         for message in st.session_state.chat_history:
             if message["role"] == "user":
-                st.markdown(f"""
+                st.markdown(textwrap.dedent(f"""
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 1.5px; color: var(--text-subtle); text-transform: uppercase; margin-top: 1.2rem; margin-bottom: 0.2rem;">SUBMITTED INQUIRY</div>
                 <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 700; color: var(--text-main); border-bottom: 1px solid var(--border-thin); padding-bottom: 0.5rem; margin-bottom: 1rem;">{message['content']}</div>
-                """, unsafe_allow_html=True)
+                """), unsafe_allow_html=True)
             else:
-                st.markdown(f"""
+                st.markdown(textwrap.dedent(f"""
                 <div class="research-brief">
                     <div class="brief-head">POLICY BRIEF & GROUNDED SYNTHESIS</div>
                     <div style="font-size: 0.92rem; line-height: 1.7; color: var(--text-main);">{message['content']}</div>
                 </div>
-                """, unsafe_allow_html=True)
+                """), unsafe_allow_html=True)
                 
                 if "sources" in message and message["sources"]:
                     with st.expander("SOURCE EVIDENCE & DOCUMENT REFERENCES"):
                         for idx, src in enumerate(message["sources"]):
-                            st.markdown(f"""
+                            st.markdown(textwrap.dedent(f"""
                             <div class="citation-box">
                                 <div class="citation-head">
                                     <span>[REF {idx+1}] {src['source']} — PAGE {src['page']}</span>
@@ -858,7 +860,7 @@ with tab_chat:
                                 </div>
                                 <div class="citation-text">{src['content']}</div>
                             </div>
-                            """, unsafe_allow_html=True)
+                            """), unsafe_allow_html=True)
 
         # Input & Query Execution
         input_disabled = (st.session_state.vector_db is None or chunk_count == 0)
@@ -921,13 +923,13 @@ with tab_schemes:
     scheme_cols = st.columns(3)
     for idx, scheme in enumerate(DEMO_SCHEMES):
         with scheme_cols[idx]:
-            st.markdown(f"""
+            st.markdown(textwrap.dedent(f"""
             <div class="scheme-card-flat">
                 <div class="scheme-code">{scheme['code']}</div>
                 <div class="scheme-title">{scheme['name']}</div>
                 <div class="scheme-desc">{scheme['description']}</div>
             </div>
-            """, unsafe_allow_html=True)
+            """), unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("---")
@@ -936,11 +938,11 @@ with tab_schemes:
     st.markdown("<br>", unsafe_allow_html=True)
     
     for scheme in DEMO_SCHEMES:
-        st.markdown(f"""
+        st.markdown(textwrap.dedent(f"""
         <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem;">
             {scheme['name']} <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 400; color: var(--text-subtle);">[{scheme['short']}]</span>
         </div>
-        """, unsafe_allow_html=True)
+        """), unsafe_allow_html=True)
         
         q_cols = st.columns(len(scheme["questions"]))
         for q_idx, q in enumerate(scheme["questions"]):
@@ -956,7 +958,7 @@ with tab_howto:
     st.markdown("<br>", unsafe_allow_html=True)
     
     # Documentary Video Frame
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div style="background: var(--surface-white); border: 1px solid var(--border-thin); padding: 1.5rem; margin-bottom: 2rem;">
         <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
             Briefing Video: Public Policy Document Indexing & Grounded Verification
@@ -974,7 +976,7 @@ with tab_howto:
             </iframe>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
     
     st.markdown("---")
     st.markdown('<div class="section-label">Operational Procedures</div>', unsafe_allow_html=True)
@@ -987,19 +989,19 @@ with tab_howto:
                 f'<div style="font-size: 0.84rem; color: var(--text-main); padding: 0.4rem 0.8rem; margin: 0.35rem 0; border-left: 2px solid var(--border-heavy); background: var(--bg-paper);">▸ {step}</div>' 
                 for step in tutorial['steps']
             )
-            st.markdown(f"""
+            st.markdown(textwrap.dedent(f"""
             <div style="background: var(--surface-white); border: 1px solid var(--border-thin); padding: 1.5rem; height: 100%;">
                 <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">{tutorial['title']}</div>
                 <div style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">{tutorial['description']}</div>
                 {steps_html}
             </div>
-            """, unsafe_allow_html=True)
+            """), unsafe_allow_html=True)
             
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("---")
     st.markdown('<div class="section-label">Technical Architecture & Grounded Pipeline</div>', unsafe_allow_html=True)
     
-    st.markdown("""
+    st.markdown(textwrap.dedent("""
     <div style="background: var(--surface-white); border: 1px solid var(--border-thin); padding: 1.5rem; margin-top: 1rem;">
         <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem;">
             End-to-End Grounded Retrieval Pipeline
@@ -1037,4 +1039,4 @@ with tab_howto:
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
