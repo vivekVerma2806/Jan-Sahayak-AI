@@ -370,6 +370,7 @@ st.markdown(textwrap.dedent("""
         border-bottom: 1px solid var(--border-thin);
     }
     .hero-title {
+        display: block;
         font-family: 'Cormorant Garamond', 'Libre Baskerville', Georgia, serif;
         font-size: 2.6rem;
         font-weight: 700;
@@ -377,14 +378,17 @@ st.markdown(textwrap.dedent("""
         color: var(--text-main);
         max-width: 920px;
         margin: 0 auto 0.8rem auto;
+        text-align: center;
     }
     .hero-deck {
+        display: block;
         font-family: 'Inter', sans-serif;
         font-size: 0.98rem;
         line-height: 1.6;
         color: var(--text-muted);
         max-width: 780px;
         margin: 0 auto 1.5rem auto;
+        text-align: center;
     }
 
     /* ===== Editorial 3-Column Methodology ===== */
@@ -751,7 +755,7 @@ with tab_chat:
     if not st.session_state.chat_history and st.session_state.pending_question is None:
         st.markdown(
 '<div class="hero-container">'
-'<h2 class="hero-title">Grounded Artificial Intelligence for Public Policy Verification</h2>'
+'<div class="hero-title">Grounded Artificial Intelligence for Public Policy Verification</div>'
 '<div class="hero-deck">Jan Sahayak operates via strict Retrieval-Augmented Generation (RAG). '
 'Every answer is compiled directly from official government scheme gazettes without extrapolation or external assumptions.</div>'
 '<div class="methodology-grid">'
