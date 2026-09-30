@@ -1,93 +1,129 @@
-# Jan Sahayak AI
+# Jan Sahayak AI 🤝
 
-A smart chatbot that helps you understand Indian government schemes. Upload scheme PDFs, ask questions in plain language, and get accurate answers backed by real document sources.
+A smart AI-powered assistant that helps citizens understand Indian government schemes. Upload scheme PDFs, ask questions in plain language, and get accurate, objective answers backed by real document source citations.
 
-Built with Retrieval-Augmented Generation (RAG) — every answer comes from the actual documents, not from AI guessing.
+Built with **Retrieval-Augmented Generation (RAG)** — every answer comes strictly from the uploaded scheme documents, preventing hallucinations.
 
-## What It Does
+---
 
-- Upload government scheme PDFs and index them automatically
-- Ask questions in natural language about any scheme
-- Get answers grounded strictly in the uploaded documents
-- See exactly which document and page the answer came from
-- Pre-loaded with 3 demo schemes to try instantly
+## 🌟 Key Features
 
-## Demo Schemes Included
+- 📄 **Upload & Index PDFs**: Parse official government scheme documents automatically into a vector database.
+- 💬 **Grounded Q&A**: Ask natural language questions; receive answers strictly sourced from the indexed PDFs.
+- 📍 **Source Verification**: View exact chunk content, document names, page numbers, and similarity confidence scores.
+- 🎯 **Pre-loaded Demo Schemes**: Quick-start buttons for PMJDY, PM-KISAN, and Ayushman Bharat (PM-JAY).
+- 🎨 **Modern Dark UI**: Premium glassmorphism dark theme designed with Streamlit.
 
-| Scheme | What It Covers |
-|--------|---------------|
-| Pradhan Mantri Jan Dhan Yojana | Zero-balance bank accounts, RuPay cards, insurance |
-| PM Kisan Samman Nidhi | Direct income support of ₹6,000/year for farmers |
-| Ayushman Bharat (PM-JAY) | ₹5 Lakh cashless health coverage for families |
+---
 
-## Tech Stack
-
-- **Frontend**: Streamlit with custom dark theme
-- **AI Model**: Google Gemini 2.0 Flash
-- **Embeddings**: Gemini Embedding 001
-- **Vector DB**: ChromaDB
-- **Framework**: LangChain
-- **PDF Parsing**: PyPDF
-
-## How It Works
+## 🏗️ Architecture & Tech Stack
 
 ```
-PDF Upload → Text Extraction → Chunking (1000 chars) → Embedding → ChromaDB Storage
-                                                                          ↓
-User Question → Semantic Search → Top-K Retrieval → Gemini Generates Answer
+PDF Upload ➔ Text Extraction ➔ Overlapping Chunking ➔ Local ONNX Embeddings ➔ ChromaDB Vector Store
+                                                                                     │
+User Query  ➔ Semantic Search ➔ Top-K Retrieval ➔ Gemini 2.0 Flash Model ➔ Grounded Answer + Citations
 ```
 
-1. PDFs are split into overlapping chunks of 1000 characters
-2. Each chunk is converted into a 768-dimensional vector using Gemini embeddings
-3. Vectors are stored in ChromaDB for fast similarity search
-4. When you ask a question, it finds the most relevant chunks
-5. Gemini reads those chunks and writes a grounded answer
+- **Frontend**: Streamlit with custom CSS & dark theme
+- **AI Model**: Google Gemini (via `langchain-google-genai`)
+- **Embeddings**: Fast local CPU ONNX Embeddings (`all-MiniLM-L6-v2` via ChromaDB)
+- **Vector DB**: ChromaDB (`langchain-chroma`)
+- **Document Processing**: LangChain & PyPDF
 
-## Setup
+---
 
-```bash
-# Clone the repo
-git clone https://github.com/vivekVerma2806/Jan-Sahayak-AI.git
-cd Jan-Sahayak-AI
+## 🚀 Local Setup Guide
 
-# Install dependencies
-pip install -r requirements.txt
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/Jan-Sahayak-AI.git
+   cd Jan-Sahayak-AI
+   ```
 
-# Add your Gemini API key
-# Create a .env file with:
-GOOGLE_API_KEY=your_api_key_here
+2. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-# Generate demo scheme PDFs
-python generate_dummy_assets.py
+3. **Configure API Key**:
+   - Get a free Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
+   - Create a `.streamlit/secrets.toml` file or a `.env` file:
+     ```toml
+     GOOGLE_API_KEY = "your_actual_gemini_api_key"
+     ```
 
-# Run the app
-streamlit run app.py
-```
+4. **Generate Demo PDFs & Run App**:
+   ```bash
+   python generate_dummy_assets.py
+   streamlit run app.py
+   ```
 
-Get your free Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
+---
 
-## Project Structure
+## 🌐 Deploying to Streamlit Community Cloud (Step-by-Step)
+
+Deploy your application online for free in 5 simple steps:
+
+### Step 1: Push Code to GitHub
+1. Create a new public or private repository on [GitHub](https://github.com/new) named `Jan-Sahayak-AI`.
+2. Push your project code to GitHub:
+   ```bash
+   git init
+   git add .
+   git commit -m "Prepare Jan Sahayak AI for Streamlit Cloud deployment"
+   git branch -M main
+   git remote add origin https://github.com/your-username/Jan-Sahayak-AI.git
+   git push -u origin main
+   ```
+   *(Note: Sensitive keys in `.env` and `.streamlit/secrets.toml` are automatically excluded by `.gitignore`)*
+
+### Step 2: Log into Streamlit Cloud
+1. Go to [share.streamlit.io](https://share.streamlit.io).
+2. Click **Continue with GitHub** to sign in with your GitHub account.
+
+### Step 3: Create a New App
+1. Click the **"New app"** button in the top right corner.
+2. Select **"Use existing repo"**.
+3. Fill in the deployment details:
+   - **Repository**: `your-username/Jan-Sahayak-AI`
+   - **Branch**: `main`
+   - **Main file path**: `app.py`
+   - **App URL**: Choose a custom URL slug if desired (e.g. `jan-sahayak-ai.streamlit.app`).
+
+### Step 4: Add Gemini API Key to Secrets
+1. Before clicking Deploy, click **"Advanced settings..."** (or go to **Settings ➔ Secrets** after creating).
+2. Under the **Secrets** text area, paste your Google API key in TOML format:
+   ```toml
+   GOOGLE_API_KEY = "your_actual_gemini_api_key_here"
+   ```
+3. Click **Save**.
+
+### Step 5: Deploy & Access App
+1. Click **Deploy!**
+2. Streamlit Cloud will automatically build the environment using `requirements.txt` and launch your app.
+3. Your live application will be accessible worldwide! Any new git commits pushed to `main` will automatically update the live app.
+
+---
+
+## 📂 Project Structure
 
 ```
 Jan-Sahayak-AI/
-├── app.py                    # Main Streamlit application
-├── chatbot.py                # RAG logic and Gemini integration
-├── vector_store.py           # ChromaDB operations
-├── pdf_processor.py          # PDF text extraction and chunking
-├── utils.py                  # File handling utilities
-├── generate_dummy_assets.py  # Creates demo scheme PDFs
-├── requirements.txt          # Python dependencies
-├── .streamlit/config.toml    # Dark theme configuration
-└── uploads/                  # Stored PDF documents
+├── app.py                      # Main Streamlit web application & UI layout
+├── chatbot.py                  # Grounded RAG query logic & Gemini integration
+├── vector_store.py             # ChromaDB vector store management & ONNX embeddings
+├── pdf_processor.py            # PDF document parsing & text chunking
+├── utils.py                    # File handling & validation helpers
+├── generate_dummy_assets.py    # Script to create sample government scheme PDFs
+├── requirements.txt            # Production dependencies for Streamlit Cloud
+├── .gitignore                  # Keeps secrets & temporary database out of git
+└── .streamlit/
+    ├── config.toml             # Custom UI theme settings
+    └── secrets.toml.example    # Secrets template for cloud deployment
 ```
 
-## Screenshots
+---
 
-The app features a dark theme with three main tabs:
-- **Chat** — Ask questions and get sourced answers
-- **Schemes & Questions** — Browse available schemes and preset questions
-- **How to Use** — Tutorial video and step-by-step guide
+## 📜 License
 
-## License
-
-MIT
+Distributed under the MIT License. See `LICENSE` for more information.

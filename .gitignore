@@ -1,19 +1,25 @@
-# Environment
+# Environment & Secrets
 .env
+.streamlit/secrets.toml
 
-# Python
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Python Cache
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# Database
+# Database & Temporary Uploads
 chroma_db/
+uploads/*
+!uploads/.gitkeep
 
-# Uploads
-uploads/*.pdf
-
-# IDE
+# IDE & OS
 .vscode/
 .idea/
-
-# Streamlit secrets (never commit API keys!)
-.streamlit/secrets.toml
+.DS_Store
+*.log
