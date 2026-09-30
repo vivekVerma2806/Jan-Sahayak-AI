@@ -222,6 +222,17 @@ st.markdown(textwrap.dedent("""
     section[data-testid="stSidebar"] * {
         color: var(--text-main) !important;
     }
+    /* Restore correct button text colors inside sidebar (overrides the wildcard above) */
+    section[data-testid="stSidebar"] .stButton > button[kind="primary"],
+    section[data-testid="stSidebar"] .stButton > button[kind="primary"] p,
+    section[data-testid="stSidebar"] .stButton > button[kind="primary"] * {
+        color: var(--surface-white) !important;
+    }
+    section[data-testid="stSidebar"] .stButton > button[kind="secondary"],
+    section[data-testid="stSidebar"] .stButton > button[kind="secondary"] p,
+    section[data-testid="stSidebar"] .stButton > button[kind="secondary"] * {
+        color: var(--text-main) !important;
+    }
     .sidebar-head {
         font-family: 'Cormorant Garamond', serif;
         font-size: 1.35rem;
@@ -354,7 +365,7 @@ st.markdown(textwrap.dedent("""
     /* ===== Un-boxed Hero Section ===== */
     .hero-container {
         text-align: center;
-        padding: 1rem 0 2rem 0;
+        padding: 1rem 0 2.5rem 0;
         margin-bottom: 1.5rem;
         border-bottom: 1px solid var(--border-thin);
     }
@@ -386,8 +397,9 @@ st.markdown(textwrap.dedent("""
         border-top: 1px solid var(--border-thin);
     }
     .methodology-col {
-        padding: 0 1.5rem;
+        padding: 0 1.8rem;
         border-right: 1px solid var(--border-thin);
+        text-align: left;
     }
     .methodology-col:first-child { padding-left: 0; }
     .methodology-col:last-child { border-right: none; padding-right: 0; }
