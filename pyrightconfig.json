@@ -2,6 +2,8 @@
   "include": [
     "."
   ],
+  "pythonPath": "C:/Users/Asus/OneDrive/Desktop/UrbanPulse (1)/UrbanPulse/.python/python.exe",
+  "pythonVersion": "3.11",
   "reportMissingImports": false,
   "reportMissingModuleSource": false,
   "typeCheckingMode": "off"

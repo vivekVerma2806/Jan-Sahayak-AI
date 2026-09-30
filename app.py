@@ -737,36 +737,33 @@ with tab_chat:
     
     # Un-boxed Hero Section if no chat history
     if not st.session_state.chat_history and st.session_state.pending_question is None:
-        st.markdown(textwrap.dedent("""
-        <div class="hero-container">
-            <h2 class="hero-title">Grounded Artificial Intelligence for Public Policy Verification</h2>
-            <div class="hero-deck">
-                Jan Sahayak operates via strict Retrieval-Augmented Generation (RAG). 
-                Every answer is compiled directly from official government scheme gazettes without extrapolation or external assumptions.
-            </div>
-            
-            <div class="methodology-grid">
-                <div class="methodology-col">
-                    <div class="methodology-num">01</div>
-                    <div class="methodology-label">OFFICIAL GAZETTES</div>
-                    <div class="methodology-title">INDEXING</div>
-                    <div class="methodology-desc">Government policy documents are uploaded, extracted page by page, and split into structured 1000-character segments.</div>
-                </div>
-                <div class="methodology-col">
-                    <div class="methodology-num">02</div>
-                    <div class="methodology-label">SEMANTIC SEARCH</div>
-                    <div class="methodology-title">RETRIEVAL</div>
-                    <div class="methodology-desc">User inquiries trigger a vector similarity search across ChromaDB to locate the top-3 most relevant source passages.</div>
-                </div>
-                <div class="methodology-col">
-                    <div class="methodology-num">03</div>
-                    <div class="methodology-label">GROUNDED SYNTHESIS</div>
-                    <div class="methodology-title">CITATION</div>
-                    <div class="methodology-desc">Gemini 3.6 generates objective responses strictly bound to retrieved context, attaching complete source citations.</div>
-                </div>
-            </div>
-        </div>
-        """), unsafe_allow_html=True)
+        st.markdown(
+'<div class="hero-container">'
+'<h2 class="hero-title">Grounded Artificial Intelligence for Public Policy Verification</h2>'
+'<div class="hero-deck">Jan Sahayak operates via strict Retrieval-Augmented Generation (RAG). '
+'Every answer is compiled directly from official government scheme gazettes without extrapolation or external assumptions.</div>'
+'<div class="methodology-grid">'
+'<div class="methodology-col">'
+'<div class="methodology-num">01</div>'
+'<div class="methodology-label">OFFICIAL GAZETTES</div>'
+'<div class="methodology-title">INDEXING</div>'
+'<div class="methodology-desc">Government policy documents are uploaded, extracted page by page, and split into structured 1000-character segments.</div>'
+'</div>'
+'<div class="methodology-col">'
+'<div class="methodology-num">02</div>'
+'<div class="methodology-label">SEMANTIC SEARCH</div>'
+'<div class="methodology-title">RETRIEVAL</div>'
+'<div class="methodology-desc">User inquiries trigger a vector similarity search across ChromaDB to locate the top-3 most relevant source passages.</div>'
+'</div>'
+'<div class="methodology-col">'
+'<div class="methodology-num">03</div>'
+'<div class="methodology-label">GROUNDED SYNTHESIS</div>'
+'<div class="methodology-title">CITATION</div>'
+'<div class="methodology-desc">Gemini 3.6 generates objective responses strictly bound to retrieved context, attaching complete source citations.</div>'
+'</div>'
+'</div>'
+'</div>',
+unsafe_allow_html=True)
         
         st.markdown('<div class="section-label">Suggested Reference Inquiries</div>', unsafe_allow_html=True)
         
@@ -790,19 +787,9 @@ with tab_chat:
     is_ready = bool(API_KEY) and chunk_count > 0
 
     if not API_KEY:
-        st.markdown(textwrap.dedent("""
-        <div class="notice-box">
-            <b>API KEY REQUIRED:</b> Please enter your Google Gemini API Key in the left Utility Desk to activate the inquiry desk.
-        </div>
-        """), unsafe_allow_html=True)
+        st.markdown('<div class="notice-box"><b>API KEY REQUIRED:</b> Please enter your Google Gemini API Key in the left Utility Desk to activate the inquiry desk.</div>', unsafe_allow_html=True)
     elif num_files == 0:
-        st.markdown(textwrap.dedent("""
-        <div class="notice-box">
-            <b>ARCHIVE IS EMPTY:</b> No government scheme documents are currently indexed in the database.
-            <br><br>
-            <i>Upload policy PDFs using the Document Desk on the left, or generate the default reference schemes below.</i>
-        </div>
-        """), unsafe_allow_html=True)
+        st.markdown('<div class="notice-box"><b>ARCHIVE IS EMPTY:</b> No government scheme documents are currently indexed in the database.<br><br><i>Upload policy PDFs using the Document Desk on the left, or generate the default reference schemes below.</i></div>', unsafe_allow_html=True)
         
         if st.button("Generate & Index Official Reference Schemes", type="primary", use_container_width=True):
             with st.spinner("Generating official reference PDFs..."):
@@ -821,13 +808,7 @@ with tab_chat:
                     st.error(f"Error creating assets: {str(e)}")
                     
     elif chunk_count == 0:
-        st.markdown(textwrap.dedent("""
-        <div class="notice-box">
-            <b>DOCUMENTS UNINDEXED:</b> PDF files exist in the uploads directory but have not been vectorized into ChromaDB.
-            <br><br>
-            Please click <b>"Process & Index Documents"</b> in the left Utility Desk.
-        </div>
-        """), unsafe_allow_html=True)
+        st.markdown('<div class="notice-box"><b>DOCUMENTS UNINDEXED:</b> PDF files exist in the uploads directory but have not been vectorized into ChromaDB.<br><br>Please click <b>"Process &amp; Index Documents"</b> in the left Utility Desk.</div>', unsafe_allow_html=True)
 
     # Active Inquiry Research Brief History
     if is_ready:
@@ -837,30 +818,14 @@ with tab_chat:
         # Render Research Brief History
         for message in st.session_state.chat_history:
             if message["role"] == "user":
-                st.markdown(textwrap.dedent(f"""
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 1.5px; color: var(--text-subtle); text-transform: uppercase; margin-top: 1.2rem; margin-bottom: 0.2rem;">SUBMITTED INQUIRY</div>
-                <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 700; color: var(--text-main); border-bottom: 1px solid var(--border-thin); padding-bottom: 0.5rem; margin-bottom: 1rem;">{message['content']}</div>
-                """), unsafe_allow_html=True)
+                st.markdown(f'<div style="font-family: \'JetBrains Mono\', monospace; font-size: 0.72rem; letter-spacing: 1.5px; color: var(--text-subtle); text-transform: uppercase; margin-top: 1.2rem; margin-bottom: 0.2rem;">SUBMITTED INQUIRY</div><div style="font-family: \'Cormorant Garamond\', serif; font-size: 1.35rem; font-weight: 700; color: var(--text-main); border-bottom: 1px solid var(--border-thin); padding-bottom: 0.5rem; margin-bottom: 1rem;">{message["content"]}</div>', unsafe_allow_html=True)
             else:
-                st.markdown(textwrap.dedent(f"""
-                <div class="research-brief">
-                    <div class="brief-head">POLICY BRIEF & GROUNDED SYNTHESIS</div>
-                    <div style="font-size: 0.92rem; line-height: 1.7; color: var(--text-main);">{message['content']}</div>
-                </div>
-                """), unsafe_allow_html=True)
+                st.markdown(f'<div class="research-brief"><div class="brief-head">POLICY BRIEF &amp; GROUNDED SYNTHESIS</div><div style="font-size: 0.92rem; line-height: 1.7; color: var(--text-main);">{message["content"]}</div></div>', unsafe_allow_html=True)
                 
                 if "sources" in message and message["sources"]:
                     with st.expander("SOURCE EVIDENCE & DOCUMENT REFERENCES"):
                         for idx, src in enumerate(message["sources"]):
-                            st.markdown(textwrap.dedent(f"""
-                            <div class="citation-box">
-                                <div class="citation-head">
-                                    <span>[REF {idx+1}] {src['source']} — PAGE {src['page']}</span>
-                                    <span>RELEVANCE SCORE: {src['score']}%</span>
-                                </div>
-                                <div class="citation-text">{src['content']}</div>
-                            </div>
-                            """), unsafe_allow_html=True)
+                            st.markdown(f'<div class="citation-box"><div class="citation-head"><span>[REF {idx+1}] {src["source"]} — PAGE {src["page"]}</span><span>RELEVANCE SCORE: {src["score"]}%</span></div><div class="citation-text">{src["content"]}</div></div>', unsafe_allow_html=True)
 
         # Input & Query Execution
         input_disabled = (st.session_state.vector_db is None or chunk_count == 0)
