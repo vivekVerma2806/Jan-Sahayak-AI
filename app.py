@@ -1,4 +1,5 @@
 import os
+import base64
 import textwrap
 
 # Fix protobuf compiler descriptor compatibility issues
@@ -34,6 +35,16 @@ st.set_page_config(
 
 # Load environment variables from .env
 load_dotenv()
+
+# Load logo as base64 for embedding in HTML
+def _load_logo_b64() -> str:
+    logo_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "logo.jpg")
+    if os.path.exists(logo_path):
+        with open(logo_path, "rb") as f:
+            return base64.b64encode(f.read()).decode("utf-8")
+    return ""
+
+LOGO_B64 = _load_logo_b64()
 
 # App directories
 UPLOAD_DIR = "uploads"
@@ -173,6 +184,15 @@ st.markdown(textwrap.dedent("""
     .masthead-frame {
         text-align: center;
         margin-bottom: 1.5rem;
+    }
+    .masthead-logo {
+        display: block;
+        margin: 0 auto 0.8rem auto;
+        width: 90px;
+        height: 90px;
+        object-fit: contain;
+        filter: grayscale(100%) contrast(1.1);
+        opacity: 0.92;
     }
     .masthead-meta {
         display: flex;
@@ -726,18 +746,20 @@ with st.sidebar:
 
 
 # ===================== MAIN NEWSPAPER MASTHEAD =====================
-st.markdown(textwrap.dedent("""
-<div class="masthead-frame">
-    <div class="masthead-meta">
-        <span>PUBLIC POLICY RESEARCH DESK</span>
-        <span>EST. 2026 • NEW DELHI, INDIA</span>
-        <span>ISSUE 04 • LIVE GAZETTE</span>
-    </div>
-    <h1 class="masthead-brand">JAN SAHAYAK</h1>
-    <div class="masthead-descriptor">An independent digital gazette and grounded AI intelligence system for Indian government policy.</div>
-    <div class="masthead-rules"></div>
-</div>
-"""), unsafe_allow_html=True)
+_logo_html = f'<img src="data:image/jpeg;base64,{LOGO_B64}" class="masthead-logo" alt="Jan Sahayak emblem">' if LOGO_B64 else ''
+st.markdown(
+'<div class="masthead-frame">'
+'<div class="masthead-meta">'
+'<span>PUBLIC POLICY RESEARCH DESK</span>'
+'<span>EST. 2026 • NEW DELHI, INDIA</span>'
+'<span>ISSUE 04 • LIVE GAZETTE</span>'
+'</div>'
++ _logo_html +
+'<div class="masthead-brand">JAN SAHAYAK</div>'
+'<div class="masthead-descriptor">An independent digital gazette and grounded AI intelligence system for Indian government policy.</div>'
+'<div class="masthead-rules"></div>'
+'</div>',
+unsafe_allow_html=True)
 
 
 # ===================== TABS NAVIGATION =====================
