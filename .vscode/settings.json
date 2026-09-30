@@ -1,7 +1,11 @@
 {
+  "python.analysis.typeCheckingMode": "off",
   "python.analysis.diagnosticSeverityOverrides": {
     "reportMissingImports": "none",
-    "reportMissingModuleSource": "none"
+    "reportMissingModuleSource": "none",
+    "reportUndefinedVariable": "none",
+    "reportGeneralTypeIssues": "none"
   },
-  "python.analysis.typeCheckingMode": "off"
+  "python.linting.enabled": false,
+  "pyright.disableDiagnostics": true
 }
