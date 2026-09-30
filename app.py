@@ -6,8 +6,16 @@ os.environ["TRANSFORMERS_VERBOSITY"] = "error"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
 
-import streamlit as st
-from dotenv import load_dotenv
+try:
+    import streamlit as st
+except ImportError as e:
+    raise ImportError("Streamlit is required. Please run 'pip install streamlit'.") from e
+
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    def load_dotenv():
+        pass
 
 import utils
 import pdf_processor
@@ -458,13 +466,6 @@ st.markdown("""
         text-transform: uppercase;
         border-bottom: 1px solid var(--border-thin);
         padding-bottom: 0.4rem;
-        margin-bottom: 0.8rem;
-    }
-    .brief-query {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: var(--text-main);
         margin-bottom: 0.8rem;
     }
 
@@ -1019,7 +1020,7 @@ with tab_howto:
                 <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin: 0.3rem 0;">ONNX Embedding</div>
                 <div style="font-size: 0.76rem; color: var(--text-muted);">Fast CPU MiniLM vectorization</div>
             </div>
-            <div style="border: 1px solid var(--border-rule); padding: 1rem; background: var(--bg-paper);">
+            <div style="border: 1px solid var(--border-thin); padding: 1rem; background: var(--bg-paper);">
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; color: var(--text-subtle);">STAGE 04</div>
                 <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin: 0.3rem 0;">ChromaDB Index</div>
                 <div style="font-size: 0.76rem; color: var(--text-muted);">Persistent vector storage</div>
