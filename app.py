@@ -16,7 +16,7 @@ import chatbot
 
 # Page configuration — MUST be the first Streamlit command
 st.set_page_config(
-    page_title="Jan Sahayak AI — Public Policy Gazette",
+    page_title="JAN SAHAYAK — Public Policy Gazette & Research Desk",
     page_icon="🗞️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -103,48 +103,45 @@ TUTORIAL_VIDEOS = [
         "title": "Document Indexing Protocol",
         "description": "Systematic walkthrough for uploading official government policy PDFs, extracting document text, and vectorizing chunks into the local database.",
         "steps": [
-            "Select scheme PDFs via the Editorial Control Panel",
+            "Select scheme PDFs via the Document Utility Desk",
             "Execute 'Process & Index Documents' command",
             "Verify chunk creation and database count status",
             "Initiate grounded semantic search queries"
         ]
     },
     {
-        "title": "Query Formulation & Citation Verification",
+        "title": "Query Formulation & Citation Audit",
         "description": "Guidelines for formulating natural language inquiries and auditing returned source citations for fact verification.",
         "steps": [
-            "Submit inquiry via the Central Desk input field",
+            "Submit inquiry via the Central Research Desk",
             "Review grounded answer compiled by Gemini 3.6",
-            "Inspect 'Verified Source Footnotes' drawer",
+            "Inspect 'Source Evidence & Document References'",
             "Cross-check page numbers and confidence scores"
         ]
     }
 ]
 
-# ===================== MINIMALIST PREMIUM NEWSPAPER CSS =====================
+# ===================== REFINED EDITORIAL NEWSPAPER STYLING =====================
 st.markdown("""
 <style>
-    /* ===== Google Typography ===== */
-    @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,300..700;1,300..700&family=JetBrains+Mono:wght@400;500&display=swap');
+    /* ===== Typography Import ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-    /* ===== Color Palette & Variables ===== */
+    /* ===== Color Palette ===== */
     :root {
-        --bg-paper: #F7F5F0;
-        --surface-white: #FFFFFF;
-        --surface-warm: #EFECE6;
-        --ink-black: #111111;
-        --ink-dark: #222222;
-        --text-muted: #5F5B55;
-        --text-subtle: #8C867C;
-        --border-rule: #D8D4CC;
-        --border-dark: #111111;
-        --border-heavy: #BDB8AE;
+        --bg-paper: #F5F3EE;
+        --surface-white: #FAF9F6;
+        --text-main: #111111;
+        --text-muted: #68645D;
+        --text-subtle: #8C877D;
+        --border-thin: #C9C4BA;
+        --border-heavy: #151515;
     }
 
-    /* ===== Global Resets & Typography ===== */
+    /* ===== Global Resets ===== */
     html, body, [class*="css"] {
-        font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif !important;
-        color: var(--ink-black) !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        color: var(--text-main) !important;
         background-color: var(--bg-paper) !important;
         -webkit-font-smoothing: antialiased;
     }
@@ -153,207 +150,185 @@ st.markdown("""
         background-color: var(--bg-paper) !important;
     }
 
-    /* Editorial Containers */
+    /* Editorial Max Width */
     .block-container {
-        max-width: 1280px !important;
-        padding-top: 1.5rem !important;
-        padding-bottom: 4rem !important;
+        max-width: 1380px !important;
+        padding-top: 1.2rem !important;
+        padding-bottom: 3rem !important;
         padding-left: 2rem !important;
         padding-right: 2rem !important;
     }
 
-    /* ===== Newspaper Masthead ===== */
-    .masthead-container {
+    /* ===== Masthead ===== */
+    .masthead-frame {
         text-align: center;
-        margin-bottom: 1.8rem;
-        border-bottom: 2px solid var(--ink-black);
-        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
     }
-    .masthead-meta-top {
+    .masthead-meta {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 0.72rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.7rem;
         font-weight: 600;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: var(--text-muted);
-        border-bottom: 1px solid var(--border-rule);
-        padding-bottom: 0.4rem;
-        margin-bottom: 1.2rem;
-    }
-    .masthead-title {
-        font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
-        font-size: 3.4rem;
-        font-weight: 700;
-        letter-spacing: -0.5px;
-        color: var(--ink-black);
-        margin: 0;
-        line-height: 1.05;
-        text-transform: uppercase;
-    }
-    .masthead-subtitle {
-        font-family: 'Newsreader', Georgia, serif;
-        font-size: 1.1rem;
-        font-style: italic;
-        color: var(--text-muted);
-        margin-top: 0.4rem;
+        border-bottom: 1px solid var(--border-thin);
+        padding-bottom: 0.35rem;
         margin-bottom: 1rem;
     }
-    .masthead-nav-bar {
-        border-top: 1px solid var(--ink-black);
-        border-bottom: 1px solid var(--ink-black);
-        padding: 0.35rem 0;
-        margin-top: 0.8rem;
-        font-size: 0.75rem;
-        letter-spacing: 1.5px;
+    .masthead-brand {
+        font-family: 'Cormorant Garamond', 'Libre Baskerville', Georgia, serif;
+        font-size: 3.8rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        color: var(--text-main);
+        margin: 0;
+        line-height: 1.0;
         text-transform: uppercase;
-        font-weight: 600;
-        color: var(--ink-dark);
-        display: flex;
-        justify-content: space-around;
+    }
+    .masthead-descriptor {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.15rem;
+        font-style: italic;
+        color: var(--text-muted);
+        margin-top: 0.35rem;
+        margin-bottom: 0.8rem;
+    }
+    .masthead-rules {
+        border-top: 1px solid var(--border-thin);
+        border-bottom: 2px solid var(--border-heavy);
+        padding: 0.2rem 0;
+        margin-bottom: 1rem;
     }
 
-    /* ===== Sidebar (Editorial Desk Panel) ===== */
+    /* ===== Sidebar (Publication Utility Rail) ===== */
     section[data-testid="stSidebar"] {
-        background-color: var(--surface-warm) !important;
-        border-right: 1px solid var(--border-rule) !important;
+        background-color: #EDEAE4 !important;
+        border-right: 1px solid var(--border-thin) !important;
+        max-width: 290px !important;
     }
     section[data-testid="stSidebar"] * {
-        color: var(--ink-black) !important;
+        color: var(--text-main) !important;
     }
-    .sidebar-editorial-head {
-        font-family: 'Newsreader', serif;
-        font-size: 1.4rem;
+    .sidebar-head {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.35rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.1rem;
     }
-    .sidebar-editorial-sub {
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 0.72rem;
+    .sidebar-sub {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.68rem;
         text-transform: uppercase;
         letter-spacing: 1.5px;
         color: var(--text-muted) !important;
-        margin-bottom: 1rem;
-    }
-
-    /* Editorial Section Headers */
-    .section-label {
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--ink-black) !important;
-        border-bottom: 1px solid var(--border-rule);
-        padding-bottom: 0.3rem;
-        margin-top: 1.2rem;
         margin-bottom: 0.8rem;
     }
 
-    /* System Status Table Box */
-    .status-box {
-        background: var(--surface-white);
-        border: 1px solid var(--border-rule);
-        padding: 0.9rem 1rem;
-        margin-bottom: 1rem;
-        font-size: 0.82rem;
+    .section-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: var(--text-main) !important;
+        border-bottom: 1px solid var(--border-thin);
+        padding-bottom: 0.25rem;
+        margin-top: 1rem;
+        margin-bottom: 0.6rem;
+    }
+
+    /* System Status Metadata Rows */
+    .status-table {
+        margin-bottom: 0.8rem;
+        font-size: 0.78rem;
     }
     .status-row {
         display: flex;
         justify-content: space-between;
-        padding: 0.3rem 0;
-        border-bottom: 1px solid #F0ECE6;
+        padding: 0.28rem 0;
+        border-bottom: 1px solid #E0DCD4;
     }
     .status-row:last-child {
         border-bottom: none;
     }
-    .status-key {
+    .status-label {
+        font-size: 0.68rem;
         font-weight: 600;
         color: var(--text-muted);
         text-transform: uppercase;
-        font-size: 0.72rem;
         letter-spacing: 1px;
     }
-    .status-val {
+    .status-value {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.78rem;
-        color: var(--ink-black);
-    }
-    .status-ready {
-        color: #15803d !important;
-        font-weight: 600;
-    }
-    .status-empty {
-        color: #b91c1c !important;
-        font-weight: 600;
+        font-size: 0.75rem;
+        color: var(--text-main);
     }
 
-    /* ===== Custom Buttons (Restrained Editorial) ===== */
+    /* ===== Restrained Buttons ===== */
     .stButton > button {
         border-radius: 2px !important;
-        font-family: 'Source Sans 3', sans-serif !important;
-        font-size: 0.82rem !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.78rem !important;
         font-weight: 600 !important;
         letter-spacing: 1px !important;
         text-transform: uppercase !important;
-        transition: all 0.15s ease-in-out !important;
+        transition: all 0.12s ease-in-out !important;
         box-shadow: none !important;
     }
     
-    /* Primary Black Button */
     .stButton > button[kind="primary"] {
-        background-color: var(--ink-black) !important;
+        background-color: var(--text-main) !important;
         color: var(--surface-white) !important;
-        border: 1px solid var(--ink-black) !important;
+        border: 1px solid var(--text-main) !important;
     }
     .stButton > button[kind="primary"]:hover {
-        background-color: #333333 !important;
-        border-color: #333333 !important;
-        color: #ffffff !important;
+        background-color: #2D2C2A !important;
+        border-color: #2D2C2A !important;
+        color: #FFFFFF !important;
     }
 
-    /* Secondary Bordered Button */
     .stButton > button[kind="secondary"] {
         background-color: var(--surface-white) !important;
-        color: var(--ink-black) !important;
-        border: 1px solid var(--border-rule) !important;
+        color: var(--text-main) !important;
+        border: 1px solid var(--border-thin) !important;
     }
     .stButton > button[kind="secondary"]:hover {
-        background-color: var(--surface-warm) !important;
-        border-color: var(--ink-black) !important;
-        color: var(--ink-black) !important;
+        background-color: var(--bg-paper) !important;
+        border-color: var(--text-main) !important;
+        color: var(--text-main) !important;
     }
 
-    /* ===== Form Controls & Inputs ===== */
-    .stTextInput input, .stSelectbox select {
+    /* ===== Form Inputs ===== */
+    .stTextInput input {
         border-radius: 2px !important;
-        border: 1px solid var(--border-rule) !important;
+        border: 1px solid var(--border-thin) !important;
         background-color: var(--surface-white) !important;
-        color: var(--ink-black) !important;
-        font-family: 'Source Sans 3', sans-serif !important;
+        color: var(--text-main) !important;
+        font-family: 'Inter', sans-serif !important;
     }
     .stTextInput input:focus {
-        border-color: var(--ink-black) !important;
+        border-color: var(--text-main) !important;
         box-shadow: none !important;
     }
 
     /* ===== Streamlit Tabs ===== */
     .stTabs [data-baseweb="tab-list"] {
         gap: 0px !important;
-        border-bottom: 2px solid var(--border-rule) !important;
+        border-bottom: 2px solid var(--border-heavy) !important;
         background-color: transparent !important;
     }
     .stTabs [data-baseweb="tab"] {
-        font-family: 'Source Sans 3', sans-serif !important;
-        font-size: 0.88rem !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.82rem !important;
         font-weight: 700 !important;
         letter-spacing: 1.5px !important;
         text-transform: uppercase !important;
-        padding: 0.6rem 1.8rem !important;
+        padding: 0.5rem 1.6rem !important;
         color: var(--text-muted) !important;
         background-color: transparent !important;
         border-radius: 0px !important;
@@ -361,203 +336,208 @@ st.markdown("""
         border-bottom: 3px solid transparent !important;
     }
     .stTabs [aria-selected="true"] {
-        color: var(--ink-black) !important;
-        border-bottom: 3px solid var(--ink-black) !important;
+        color: var(--text-main) !important;
+        border-bottom: 3px solid var(--text-main) !important;
         background-color: transparent !important;
     }
 
-    /* ===== Front-Page Editorial Frontpiece ===== */
-    .editorial-lead-box {
-        background: var(--surface-white);
-        border: 1px solid var(--border-rule);
-        border-top: 3px solid var(--ink-black);
-        padding: 2rem;
-        margin-bottom: 2rem;
+    /* ===== Un-boxed Hero Section ===== */
+    .hero-container {
+        text-align: center;
+        padding: 1rem 0 2rem 0;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-thin);
     }
-    .editorial-headline {
-        font-family: 'Newsreader', Georgia, serif;
-        font-size: 2.2rem;
+    .hero-title {
+        font-family: 'Cormorant Garamond', 'Libre Baskerville', Georgia, serif;
+        font-size: 2.6rem;
         font-weight: 700;
         line-height: 1.15;
-        color: var(--ink-black);
-        margin-bottom: 0.8rem;
+        color: var(--text-main);
+        max-width: 920px;
+        margin: 0 auto 0.8rem auto;
     }
-    .editorial-subhead {
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 1.05rem;
+    .hero-deck {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.98rem;
         line-height: 1.6;
         color: var(--text-muted);
-        margin-bottom: 1.5rem;
+        max-width: 780px;
+        margin: 0 auto 1.5rem auto;
     }
-    .editorial-columns-3 {
+
+    /* ===== Editorial 3-Column Methodology ===== */
+    .methodology-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-        border-top: 1px solid var(--border-rule);
-        padding-top: 1.5rem;
+        gap: 0;
+        margin-top: 1.5rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--border-thin);
     }
-    .editorial-col {
-        border-right: 1px solid var(--border-rule);
-        padding-right: 1.2rem;
+    .methodology-col {
+        padding: 0 1.5rem;
+        border-right: 1px solid var(--border-thin);
     }
-    .editorial-col:last-child {
-        border-right: none;
-        padding-right: 0;
-    }
-    .editorial-col-num {
-        font-family: 'Newsreader', serif;
-        font-size: 1.1rem;
+    .methodology-col:first-child { padding-left: 0; }
+    .methodology-col:last-child { border-right: none; padding-right: 0; }
+    
+    .methodology-num {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2.2rem;
         font-weight: 700;
-        font-style: italic;
-        color: var(--ink-black);
+        line-height: 1;
+        color: var(--text-main);
+        margin-bottom: 0.2rem;
+    }
+    .methodology-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--text-subtle);
         margin-bottom: 0.3rem;
     }
-    .editorial-col-title {
-        font-size: 0.82rem;
+    .methodology-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.2rem;
         font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--ink-black);
+        color: var(--text-main);
         margin-bottom: 0.4rem;
     }
-    .editorial-col-body {
-        font-size: 0.88rem;
+    .methodology-desc {
+        font-size: 0.85rem;
         line-height: 1.55;
         color: var(--text-muted);
     }
 
-    /* ===== Scheme Editorial Column Cards ===== */
-    .scheme-editorial-card {
+    /* ===== Scheme Compendium Cards ===== */
+    .scheme-card-flat {
         background: var(--surface-white);
-        border: 1px solid var(--border-rule);
-        border-top: 3px solid var(--ink-black);
-        padding: 1.5rem;
+        border: 1px solid var(--border-thin);
+        padding: 1.4rem;
         height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
     }
-    .scheme-editorial-code {
+    .scheme-code {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.72rem;
-        font-weight: 500;
+        font-size: 0.7rem;
         color: var(--text-subtle);
         letter-spacing: 1px;
         margin-bottom: 0.4rem;
     }
-    .scheme-editorial-title {
-        font-family: 'Newsreader', Georgia, serif;
+    .scheme-title {
+        font-family: 'Cormorant Garamond', Georgia, serif;
         font-size: 1.35rem;
         font-weight: 700;
-        color: var(--ink-black);
-        margin-bottom: 0.6rem;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
         line-height: 1.2;
     }
-    .scheme-editorial-body {
-        font-size: 0.88rem;
+    .scheme-desc {
+        font-size: 0.86rem;
         line-height: 1.6;
         color: var(--text-muted);
+        margin-bottom: 1rem;
+    }
+
+    /* ===== Research Brief & Inquiry Answer Styling ===== */
+    .research-brief {
+        background: var(--surface-white);
+        border: 1px solid var(--border-thin);
+        border-top: 3px solid var(--border-heavy);
+        padding: 1.5rem;
         margin-bottom: 1.2rem;
     }
-
-    /* ===== Chat Messages ===== */
-    .stChatMessage {
-        background-color: var(--surface-white) !important;
-        border: 1px solid var(--border-rule) !important;
-        border-radius: 2px !important;
-        padding: 1.2rem !important;
-        margin-bottom: 1rem !important;
+    .brief-head {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        color: var(--text-subtle);
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--border-thin);
+        padding-bottom: 0.4rem;
+        margin-bottom: 0.8rem;
+    }
+    .brief-query {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 0.8rem;
     }
 
-    /* ===== Source Citation Footnotes ===== */
-    .footnote-box {
-        background-color: var(--bg-paper);
-        border: 1px solid var(--border-rule);
-        border-left: 3px solid var(--ink-black);
-        padding: 0.9rem 1.1rem;
-        margin-top: 0.6rem;
-        margin-bottom: 0.6rem;
-        font-size: 0.85rem;
+    /* Source Citation Footnotes */
+    .citation-box {
+        background: var(--bg-paper);
+        border: 1px solid var(--border-thin);
+        padding: 0.8rem 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
     }
-    .footnote-head {
+    .citation-head {
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.75rem;
+        font-size: 0.72rem;
         font-weight: 600;
-        color: var(--ink-black);
-        border-bottom: 1px solid var(--border-rule);
-        padding-bottom: 0.4rem;
-        margin-bottom: 0.5rem;
+        color: var(--text-main);
+        border-bottom: 1px solid var(--border-thin);
+        padding-bottom: 0.3rem;
+        margin-bottom: 0.4rem;
     }
-    .footnote-badge {
-        background: var(--ink-black);
-        color: var(--surface-white);
-        padding: 2px 8px;
-        font-size: 0.68rem;
-        font-weight: 600;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-    .footnote-body {
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 0.85rem;
-        line-height: 1.6;
+    .citation-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.82rem;
+        line-height: 1.55;
         color: var(--text-muted);
         white-space: pre-wrap;
     }
 
-    /* ===== Chat Input Container ===== */
+    /* Custom Chat Input */
     div[data-testid="stChatInput"] {
         border-radius: 2px !important;
-        border: 1px solid var(--ink-black) !important;
+        border: 1px solid var(--border-heavy) !important;
         background: var(--surface-white) !important;
     }
     div[data-testid="stChatInput"] textarea {
-        font-family: 'Source Sans 3', sans-serif !important;
-        color: var(--ink-black) !important;
+        font-family: 'Inter', sans-serif !important;
+        color: var(--text-main) !important;
     }
     .stBottom, div[data-testid="stBottom"] {
         background-color: var(--bg-paper) !important;
-        border-top: 1px solid var(--border-rule) !important;
+        border-top: 1px solid var(--border-thin) !important;
     }
 
-    /* ===== Expander Customization ===== */
+    /* Expander styling */
     .streamlit-expanderHeader {
-        background: var(--surface-warm) !important;
-        border: 1px solid var(--border-rule) !important;
+        background: var(--bg-paper) !important;
+        border: 1px solid var(--border-thin) !important;
         border-radius: 2px !important;
-        font-family: 'Source Sans 3', sans-serif !important;
+        font-family: 'Inter', sans-serif !important;
         font-weight: 600 !important;
-        font-size: 0.82rem !important;
+        font-size: 0.78rem !important;
         text-transform: uppercase !important;
         letter-spacing: 1px !important;
-        color: var(--ink-black) !important;
+        color: var(--text-main) !important;
     }
 
-    /* ===== Dividers ===== */
     hr {
-        border-color: var(--border-rule) !important;
-        margin: 1.5rem 0 !important;
+        border-color: var(--border-thin) !important;
+        margin: 1.4rem 0 !important;
     }
 
-    /* ===== Scrollbar ===== */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-paper); }
-    ::-webkit-scrollbar-thumb { background: var(--border-heavy); }
-    ::-webkit-scrollbar-thumb:hover { background: var(--ink-black); }
-
-    /* Warning / Lock Notice */
-    .editorial-notice {
+    .notice-box {
         background: var(--surface-white);
-        border: 1px solid var(--border-heavy);
-        border-left: 4px solid var(--ink-black);
-        padding: 1.2rem 1.5rem;
-        margin-bottom: 1.5rem;
-        font-size: 0.9rem;
+        border: 1px solid var(--border-thin);
+        border-left: 3px solid var(--border-heavy);
+        padding: 1rem 1.2rem;
+        margin-bottom: 1.2rem;
+        font-size: 0.88rem;
         line-height: 1.6;
-        color: var(--ink-black);
+        color: var(--text-main);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -594,21 +574,20 @@ if st.session_state.vector_db is None:
             pass
 
 
-# ===================== SIDEBAR (Editorial Control Panel) =====================
+# ===================== SIDEBAR (Publication Utility Rail) =====================
 with st.sidebar:
     st.markdown("""
-    <div style="padding-top: 0.5rem;">
-        <div class="sidebar-editorial-head">Editorial Desk</div>
-        <div class="sidebar-editorial-sub">Document Control & System Registry</div>
+    <div style="padding-top: 0.4rem;">
+        <div class="sidebar-head">Utility Desk</div>
+        <div class="sidebar-sub">System Registry & Ingestion</div>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("---")
     
-    # ---- System Status Box ----
+    # ---- System Status Metadata Rows ----
     is_connected = bool(API_KEY)
-    status_text = "CONNECTED" if is_connected else "DISCONNECTED"
-    status_class = "status-ready" if is_connected else "status-empty"
+    status_str = "CONNECTED" if is_connected else "DISCONNECTED"
     
     chunk_count = 0
     if st.session_state.vector_db is not None:
@@ -616,27 +595,27 @@ with st.sidebar:
     num_files = len(st.session_state.uploaded_files)
     
     st.markdown(f"""
-    <div class="section-label">System Audit</div>
-    <div class="status-box">
+    <div class="section-label">System Status</div>
+    <div class="status-table">
         <div class="status-row">
-            <span class="status-key">AI Service</span>
-            <span class="status-val {status_class}">{status_text}</span>
+            <span class="status-label">AI Service</span>
+            <span class="status-value">{status_str}</span>
         </div>
         <div class="status-row">
-            <span class="status-key">LLM Model</span>
-            <span class="status-val">Gemini 3.6 Flash</span>
+            <span class="status-label">Model</span>
+            <span class="status-value">Gemini 3.6 Flash</span>
         </div>
         <div class="status-row">
-            <span class="status-key">Vector Store</span>
-            <span class="status-val">ChromaDB</span>
+            <span class="status-label">Vector Store</span>
+            <span class="status-value">ChromaDB</span>
         </div>
         <div class="status-row">
-            <span class="status-key">Indexed PDFs</span>
-            <span class="status-val">{num_files} Docs</span>
+            <span class="status-label">Indexed</span>
+            <span class="status-value">{num_files} DOCS</span>
         </div>
         <div class="status-row">
-            <span class="status-key">Embed Chunks</span>
-            <span class="status-val">{chunk_count} Chunks</span>
+            <span class="status-label">Chunks</span>
+            <span class="status-value">{chunk_count}</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -649,31 +628,31 @@ with st.sidebar:
             type="password",
             value=st.session_state.api_key_override,
             help="Retrieve a key from Google AI Studio: https://aistudio.google.com/",
-            placeholder="Enter AIzaSy..."
+            placeholder="AIzaSy..."
         )
         if user_key != st.session_state.api_key_override:
             st.session_state.api_key_override = user_key
             st.rerun()
             
-    # ---- Document Ingestion ----
-    st.markdown('<div class="section-label">Document Ingestion</div>', unsafe_allow_html=True)
+    # ---- Document Desk ----
+    st.markdown('<div class="section-label">Document Desk</div>', unsafe_allow_html=True)
     
     uploaded_files = st.file_uploader(
         "Upload Scheme PDF Files",
         type=["pdf"],
         accept_multiple_files=True,
-        help="Upload official government policy gazettes or scheme documentation."
+        help="Upload official government policy guidelines."
     )
     
     process_btn = st.button("Process & Index Documents", type="primary", use_container_width=True)
     
     if process_btn:
         if not API_KEY:
-            st.error("API Key not configured! Please enter your key above or configure secrets.")
+            st.error("API Key not configured! Please enter your key above or in secrets.")
         elif not uploaded_files:
             st.warning("Please select at least one PDF file prior to indexing.")
         else:
-            with st.spinner("Parsing documents & generating vector embeddings..."):
+            with st.spinner("Extracting text & vectorizing chunks..."):
                 saved_paths = []
                 for uploaded_file in uploaded_files:
                     if utils.validate_pdf(uploaded_file.name, uploaded_file.size):
@@ -697,7 +676,7 @@ with st.sidebar:
                         st.session_state.uploaded_files = [
                             f for f in os.listdir(UPLOAD_DIR) if f.lower().endswith('.pdf')
                         ]
-                        st.success(f"Successfully indexed {len(saved_paths)} PDFs into {len(all_chunks)} chunks.")
+                        st.success(f"Indexed {len(saved_paths)} PDFs into {len(all_chunks)} chunks.")
                     except Exception as e:
                         st.error(f"Database error: {str(e)}")
                 else:
@@ -705,17 +684,17 @@ with st.sidebar:
                     
     # Active Files Registry
     if num_files > 0:
-        with st.expander("Indexed Document Archive"):
+        with st.expander("Indexed Files Archive"):
             for f in st.session_state.uploaded_files:
                 st.caption(f"• {f}")
                 
     st.markdown("---")
     
     # ---- Database Reset ----
-    st.markdown('<div class="section-label">Archive Management</div>', unsafe_allow_html=True)
-    reset_btn = st.button("Reset Database & Memory", type="secondary", use_container_width=True)
+    st.markdown('<div class="section-label">Archive Reset</div>', unsafe_allow_html=True)
+    reset_btn = st.button("Reset Memory & DB", type="secondary", use_container_width=True)
     if reset_btn:
-        with st.spinner("Clearing local storage & memory..."):
+        with st.spinner("Resetting storage & cache..."):
             utils.clear_directory(UPLOAD_DIR)
             vector_store.reset_vector_store(CHROMA_DIR)
             st.session_state.chat_history = []
@@ -729,14 +708,15 @@ with st.sidebar:
 
 # ===================== MAIN NEWSPAPER MASTHEAD =====================
 st.markdown("""
-<div class="masthead-container">
-    <div class="masthead-meta-top">
-        <span>PUBLIC POLICY INTELLIGENCE ARCHIVE</span>
+<div class="masthead-frame">
+    <div class="masthead-meta">
+        <span>PUBLIC POLICY RESEARCH DESK</span>
         <span>EST. 2026 • NEW DELHI, INDIA</span>
-        <span>LIVE GAZETTE EDITION</span>
+        <span>ISSUE 04 • LIVE GAZETTE</span>
     </div>
-    <h1 class="masthead-title">JAN SAHAYAK</h1>
-    <div class="masthead-subtitle">An Independent Digital Gazette & Grounded AI Intelligence System for Indian Government Policy</div>
+    <h1 class="masthead-brand">JAN SAHAYAK</h1>
+    <div class="masthead-descriptor">An independent digital gazette and grounded AI intelligence system for Indian government policy.</div>
+    <div class="masthead-rules"></div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -749,33 +729,37 @@ tab_chat, tab_schemes, tab_howto = st.tabs([
 ])
 
 
-# ===================== TAB 1: INQUIRY DESK (CHAT) =====================
+# ===================== TAB 1: INQUIRY DESK (RESEARCH DESK) =====================
 with tab_chat:
     
-    # Front-page editorial leadpiece if no chat history
+    # Un-boxed Hero Section if no chat history
     if not st.session_state.chat_history and st.session_state.pending_question is None:
         st.markdown("""
-        <div class="editorial-lead-box">
-            <div class="editorial-headline">Grounded Artificial Intelligence for Public Policy Verification</div>
-            <div class="editorial-subhead">
+        <div class="hero-container">
+            <h2 class="hero-title">Grounded Artificial Intelligence for Public Policy Verification</h2>
+            <div class="hero-deck">
                 Jan Sahayak operates via strict Retrieval-Augmented Generation (RAG). 
                 Every answer is compiled directly from official government scheme gazettes without extrapolation or external assumptions.
             </div>
-            <div class="editorial-columns-3">
-                <div class="editorial-col">
-                    <div class="editorial-col-num">I. INDEXING</div>
-                    <div class="editorial-col-title">Official Gazettes</div>
-                    <div class="editorial-col-body">Government policy documents are uploaded, extracted page by page, and split into structured 1000-character segments.</div>
+            
+            <div class="methodology-grid">
+                <div class="methodology-col">
+                    <div class="methodology-num">01</div>
+                    <div class="methodology-label">OFFICIAL GAZETTES</div>
+                    <div class="methodology-title">INDEXING</div>
+                    <div class="methodology-desc">Government policy documents are uploaded, extracted page by page, and split into structured 1000-character segments.</div>
                 </div>
-                <div class="editorial-col">
-                    <div class="editorial-col-num">II. RETRIEVAL</div>
-                    <div class="editorial-col-title">Semantic Search</div>
-                    <div class="editorial-col-body">User inquiries trigger a vector similarity search across ChromaDB to locate the top-3 most relevant source passages.</div>
+                <div class="methodology-col">
+                    <div class="methodology-num">02</div>
+                    <div class="methodology-label">SEMANTIC SEARCH</div>
+                    <div class="methodology-title">RETRIEVAL</div>
+                    <div class="methodology-desc">User inquiries trigger a vector similarity search across ChromaDB to locate the top-3 most relevant source passages.</div>
                 </div>
-                <div class="editorial-col">
-                    <div class="editorial-col-num">III. CITATION</div>
-                    <div class="editorial-col-title">Grounded Synthesis</div>
-                    <div class="editorial-col-body">Gemini 3.6 generates objective responses strictly bound to retrieved context, attaching complete source citations.</div>
+                <div class="methodology-col">
+                    <div class="methodology-num">03</div>
+                    <div class="methodology-label">GROUNDED SYNTHESIS</div>
+                    <div class="methodology-title">CITATION</div>
+                    <div class="methodology-desc">Gemini 3.6 generates objective responses strictly bound to retrieved context, attaching complete source citations.</div>
                 </div>
             </div>
         </div>
@@ -804,16 +788,16 @@ with tab_chat:
 
     if not API_KEY:
         st.markdown("""
-        <div class="editorial-notice">
-            <b>NOTICE: API KEY REQUIRED</b> — Please enter your Google Gemini API Key in the left Editorial Control Panel to activate inquiry desk functionality.
+        <div class="notice-box">
+            <b>API KEY REQUIRED:</b> Please enter your Google Gemini API Key in the left Utility Desk to activate the inquiry desk.
         </div>
         """, unsafe_allow_html=True)
     elif num_files == 0:
         st.markdown("""
-        <div class="editorial-notice">
-            <b>NOTICE: ARCHIVE IS EMPTY</b> — No government scheme documents are currently indexed in the database.
+        <div class="notice-box">
+            <b>ARCHIVE IS EMPTY:</b> No government scheme documents are currently indexed in the database.
             <br><br>
-            <i>Instructions: Upload policy PDFs using the Editorial Control Panel on the left, or generate the default reference PDFs below.</i>
+            <i>Upload policy PDFs using the Document Desk on the left, or generate the default reference schemes below.</i>
         </div>
         """, unsafe_allow_html=True)
         
@@ -835,39 +819,49 @@ with tab_chat:
                     
     elif chunk_count == 0:
         st.markdown("""
-        <div class="editorial-notice">
-            <b>NOTICE: DOCUMENTS DETECTED BUT UNINDEXED</b> — PDF files exist in the uploads directory but have not been vectorized into ChromaDB.
+        <div class="notice-box">
+            <b>DOCUMENTS UNINDEXED:</b> PDF files exist in the uploads directory but have not been vectorized into ChromaDB.
             <br><br>
-            Please click <b>"Process & Index Documents"</b> in the Editorial Control Panel.
+            Please click <b>"Process & Index Documents"</b> in the left Utility Desk.
         </div>
         """, unsafe_allow_html=True)
 
-    # Active Chat Interface
+    # Active Inquiry Research Brief History
     if is_ready:
         if st.session_state.vector_db is None:
             st.warning("Database initializing... please wait.")
             
-        # Render Existing Chat Log
+        # Render Research Brief History
         for message in st.session_state.chat_history:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
+            if message["role"] == "user":
+                st.markdown(f"""
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 1.5px; color: var(--text-subtle); text-transform: uppercase; margin-top: 1.2rem; margin-bottom: 0.2rem;">SUBMITTED INQUIRY</div>
+                <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 700; color: var(--text-main); border-bottom: 1px solid var(--border-thin); padding-bottom: 0.5rem; margin-bottom: 1rem;">{message['content']}</div>
+                """, unsafe_allow_html=True)
+            else:
+                st.markdown(f"""
+                <div class="research-brief">
+                    <div class="brief-head">POLICY BRIEF & GROUNDED SYNTHESIS</div>
+                    <div style="font-size: 0.92rem; line-height: 1.7; color: var(--text-main);">{message['content']}</div>
+                </div>
+                """, unsafe_allow_html=True)
                 
                 if "sources" in message and message["sources"]:
-                    with st.expander("VERIFIED SOURCE FOOTNOTES & CITATIONS"):
+                    with st.expander("SOURCE EVIDENCE & DOCUMENT REFERENCES"):
                         for idx, src in enumerate(message["sources"]):
                             st.markdown(f"""
-                            <div class="footnote-box">
-                                <div class="footnote-head">
-                                    <span>DOCUMENT CITATION NO. {idx+1}: {src['source']} (PAGE {src['page']})</span>
-                                    <span class="footnote-badge">RELEVANCE: {src['score']}%</span>
+                            <div class="citation-box">
+                                <div class="citation-head">
+                                    <span>[REF {idx+1}] {src['source']} — PAGE {src['page']}</span>
+                                    <span>RELEVANCE SCORE: {src['score']}%</span>
                                 </div>
-                                <div class="footnote-body">{src['content']}</div>
+                                <div class="citation-text">{src['content']}</div>
                             </div>
                             """, unsafe_allow_html=True)
 
         # Input & Query Execution
         input_disabled = (st.session_state.vector_db is None or chunk_count == 0)
-        placeholder_str = "Submit inquiry on any government scheme..." if not input_disabled else "Index documents to enable inquiry desk"
+        placeholder_str = "Submit inquiry on any government scheme..." if not input_disabled else "Index documents to enable research desk"
         
         user_query = st.chat_input(placeholder_str, disabled=input_disabled)
         
@@ -877,8 +871,6 @@ with tab_chat:
             st.session_state.pending_question = None
 
         if user_query:
-            with st.chat_message("user"):
-                st.markdown(user_query)
             st.session_state.chat_history.append({"role": "user", "content": user_query})
 
             cache = st.session_state.query_cache
@@ -886,47 +878,30 @@ with tab_chat:
                 answer = cache[user_query]["answer"]
                 sources = cache[user_query]["sources"]
             else:
-                with st.chat_message("assistant"):
-                    with st.spinner("Searching gazettes & compiling answer..."):
-                        try:
-                            chunks_with_scores = chatbot.retrieve_relevant_chunks(
-                                st.session_state.vector_db,
-                                user_query,
-                                k=3
-                            )
+                with st.spinner("Searching gazettes & compiling policy brief..."):
+                    try:
+                        chunks_with_scores = chatbot.retrieve_relevant_chunks(
+                            st.session_state.vector_db,
+                            user_query,
+                            k=3
+                        )
 
-                            result = chatbot.generate_answer(
-                                user_query,
-                                chunks_with_scores,
-                                API_KEY
-                            )
+                        result = chatbot.generate_answer(
+                            user_query,
+                            chunks_with_scores,
+                            API_KEY
+                        )
 
-                            answer = result["answer"]
-                            sources = result["sources"]
+                        answer = result["answer"]
+                        sources = result["sources"]
 
-                            if len(cache) >= 30:
-                                cache.pop(next(iter(cache)))
-                            cache[user_query] = {"answer": answer, "sources": sources}
+                        if len(cache) >= 30:
+                            cache.pop(next(iter(cache)))
+                        cache[user_query] = {"answer": answer, "sources": sources}
 
-                        except Exception as e:
-                            answer = f"⚠️ **Execution Error:** {str(e)}\n\nPlease check your API key and network connection."
-                            sources = []
-
-            with st.chat_message("assistant"):
-                st.markdown(answer)
-
-                if sources:
-                    with st.expander("VERIFIED SOURCE FOOTNOTES & CITATIONS"):
-                        for idx, src in enumerate(sources):
-                            st.markdown(f"""
-                            <div class="footnote-box">
-                                <div class="footnote-head">
-                                    <span>DOCUMENT CITATION NO. {idx+1}: {src['source']} (PAGE {src['page']})</span>
-                                    <span class="footnote-badge">RELEVANCE: {src['score']}%</span>
-                                </div>
-                                <div class="footnote-body">{src['content']}</div>
-                            </div>
-                            """, unsafe_allow_html=True)
+                    except Exception as e:
+                        answer = f"⚠️ Execution Error: {str(e)}"
+                        sources = []
 
             st.session_state.chat_history.append({
                 "role": "assistant",
@@ -946,25 +921,23 @@ with tab_schemes:
     for idx, scheme in enumerate(DEMO_SCHEMES):
         with scheme_cols[idx]:
             st.markdown(f"""
-            <div class="scheme-editorial-card">
-                <div>
-                    <div class="scheme-editorial-code">{scheme['code']}</div>
-                    <div class="scheme-editorial-title">{scheme['name']}</div>
-                    <div class="scheme-editorial-body">{scheme['description']}</div>
-                </div>
+            <div class="scheme-card-flat">
+                <div class="scheme-code">{scheme['code']}</div>
+                <div class="scheme-title">{scheme['name']}</div>
+                <div class="scheme-desc">{scheme['description']}</div>
             </div>
             """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("---")
     st.markdown('<div class="section-label">Categorized Inquiry Index</div>', unsafe_allow_html=True)
-    st.markdown("Click any inquiry below to submit it directly to the Central Inquiry Desk:")
+    st.markdown("Select any inquiry below to submit it directly to the Central Research Desk:")
     st.markdown("<br>", unsafe_allow_html=True)
     
     for scheme in DEMO_SCHEMES:
         st.markdown(f"""
-        <div style="font-family: 'Newsreader', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink-black); margin-bottom: 0.5rem; margin-top: 1rem;">
-            {scheme['name']} <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 400; color: var(--text-subtle);">[{scheme['short']}]</span>
+        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem; margin-top: 1rem;">
+            {scheme['name']} <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 400; color: var(--text-subtle);">[{scheme['short']}]</span>
         </div>
         """, unsafe_allow_html=True)
         
@@ -978,19 +951,19 @@ with tab_schemes:
 
 # ===================== TAB 3: SYSTEM METHODOLOGY =====================
 with tab_howto:
-    st.markdown('<div class="section-label">System Documentary & Instructional Guidance</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-label">System Documentary & Instructional Briefing</div>', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # Documentary Video Dispatch
+    # Documentary Video Frame
     st.markdown("""
-    <div style="background: var(--surface-white); border: 1px solid var(--border-rule); border-top: 3px solid var(--ink-black); padding: 1.5rem; margin-bottom: 2rem;">
-        <div style="font-family: 'Newsreader', serif; font-size: 1.4rem; font-weight: 700; color: var(--ink-black); margin-bottom: 0.5rem;">
-            Video Dispatch: Public Policy & Scheme Intelligence Framework
+    <div style="background: var(--surface-white); border: 1px solid var(--border-thin); padding: 1.5rem; margin-bottom: 2rem;">
+        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">
+            Briefing Video: Public Policy Document Indexing & Grounded Verification
         </div>
         <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.6;">
-            An orientation briefing on understanding public policy structures, document extraction protocols, and grounded AI inquiry.
+            Orientation dispatch on policy extraction protocols, vector store searching, and document citation auditing.
         </div>
-        <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid var(--border-rule);">
+        <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid var(--border-thin);">
             <iframe 
                 src="https://www.youtube-nocookie.com/embed/h2aWGlSVr98" 
                 title="Government Schemes Tutorial"
@@ -1010,56 +983,56 @@ with tab_howto:
     for t_idx, tutorial in enumerate(TUTORIAL_VIDEOS):
         with guide_cols[t_idx]:
             steps_html = ''.join(
-                f'<div style="font-size: 0.85rem; color: var(--ink-black); padding: 0.4rem 0.8rem; margin: 0.4rem 0; border-left: 2px solid var(--ink-black); background: var(--bg-paper);">▸ {step}</div>' 
+                f'<div style="font-size: 0.84rem; color: var(--text-main); padding: 0.4rem 0.8rem; margin: 0.35rem 0; border-left: 2px solid var(--border-heavy); background: var(--bg-paper);">▸ {step}</div>' 
                 for step in tutorial['steps']
             )
             st.markdown(f"""
-            <div style="background: var(--surface-white); border: 1px solid var(--border-rule); padding: 1.5rem; height: 100%;">
-                <div style="font-family: 'Newsreader', serif; font-size: 1.25rem; font-weight: 700; color: var(--ink-black); margin-bottom: 0.5rem;">{tutorial['title']}</div>
-                <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">{tutorial['description']}</div>
+            <div style="background: var(--surface-white); border: 1px solid var(--border-thin); padding: 1.5rem; height: 100%;">
+                <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem;">{tutorial['title']}</div>
+                <div style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">{tutorial['description']}</div>
                 {steps_html}
             </div>
             """, unsafe_allow_html=True)
             
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("---")
-    st.markdown('<div class="section-label">Technical Architecture & RAG Pipeline</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-label">Technical Architecture & Grounded Pipeline</div>', unsafe_allow_html=True)
     
     st.markdown("""
-    <div style="background: var(--surface-white); border: 1px solid var(--border-rule); border-top: 3px solid var(--ink-black); padding: 1.5rem; margin-top: 1rem;">
-        <div style="font-family: 'Newsreader', serif; font-size: 1.3rem; font-weight: 700; color: var(--ink-black); margin-bottom: 1rem;">
+    <div style="background: var(--surface-white); border: 1px solid var(--border-thin); padding: 1.5rem; margin-top: 1rem;">
+        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem;">
             End-to-End Grounded Retrieval Pipeline
         </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; text-align: center;">
-            <div style="border: 1px solid var(--border-rule); padding: 1rem; background: var(--bg-paper);">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; color: var(--text-subtle);">STAGE 01</div>
-                <div style="font-weight: 700; font-size: 0.9rem; color: var(--ink-black); margin: 0.3rem 0;">PDF Ingestion</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted);">Parsing official scheme gazettes</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.8rem; text-align: center;">
+            <div style="border: 1px solid var(--border-thin); padding: 1rem; background: var(--bg-paper);">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; color: var(--text-subtle);">STAGE 01</div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin: 0.3rem 0;">PDF Ingestion</div>
+                <div style="font-size: 0.76rem; color: var(--text-muted);">Parsing official scheme gazettes</div>
+            </div>
+            <div style="border: 1px solid var(--border-thin); padding: 1rem; background: var(--bg-paper);">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; color: var(--text-subtle);">STAGE 02</div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin: 0.3rem 0;">Text Chunking</div>
+                <div style="font-size: 0.76rem; color: var(--text-muted);">1000-char overlapping blocks</div>
+            </div>
+            <div style="border: 1px solid var(--border-thin); padding: 1rem; background: var(--bg-paper);">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; color: var(--text-subtle);">STAGE 03</div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin: 0.3rem 0;">ONNX Embedding</div>
+                <div style="font-size: 0.76rem; color: var(--text-muted);">Fast CPU MiniLM vectorization</div>
             </div>
             <div style="border: 1px solid var(--border-rule); padding: 1rem; background: var(--bg-paper);">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; color: var(--text-subtle);">STAGE 02</div>
-                <div style="font-weight: 700; font-size: 0.9rem; color: var(--ink-black); margin: 0.3rem 0;">Text Chunking</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted);">1000-char overlapping blocks</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; color: var(--text-subtle);">STAGE 04</div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin: 0.3rem 0;">ChromaDB Index</div>
+                <div style="font-size: 0.76rem; color: var(--text-muted);">Persistent vector storage</div>
             </div>
-            <div style="border: 1px solid var(--border-rule); padding: 1rem; background: var(--bg-paper);">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; color: var(--text-subtle);">STAGE 03</div>
-                <div style="font-weight: 700; font-size: 0.9rem; color: var(--ink-black); margin: 0.3rem 0;">ONNX Embedding</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted);">Fast CPU MiniLM vectorization</div>
+            <div style="border: 1px solid var(--border-thin); padding: 1rem; background: var(--bg-paper);">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; color: var(--text-subtle);">STAGE 05</div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin: 0.3rem 0;">Cosine Search</div>
+                <div style="font-size: 0.76rem; color: var(--text-muted);">Top-K chunk retrieval</div>
             </div>
-            <div style="border: 1px solid var(--border-rule); padding: 1rem; background: var(--bg-paper);">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; color: var(--text-subtle);">STAGE 04</div>
-                <div style="font-weight: 700; font-size: 0.9rem; color: var(--ink-black); margin: 0.3rem 0;">ChromaDB Index</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted);">Persistent vector storage</div>
-            </div>
-            <div style="border: 1px solid var(--border-rule); padding: 1rem; background: var(--bg-paper);">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; color: var(--text-subtle);">STAGE 05</div>
-                <div style="font-weight: 700; font-size: 0.9rem; color: var(--ink-black); margin: 0.3rem 0;">Cosine Search</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted);">Top-K chunk retrieval</div>
-            </div>
-            <div style="border: 1px solid var(--border-rule); padding: 1rem; background: var(--bg-paper);">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; color: var(--text-subtle);">STAGE 06</div>
-                <div style="font-weight: 700; font-size: 0.9rem; color: var(--ink-black); margin: 0.3rem 0;">Gemini Synthesis</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted);">Grounded answer + citations</div>
+            <div style="border: 1px solid var(--border-thin); padding: 1rem; background: var(--bg-paper);">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; color: var(--text-subtle);">STAGE 06</div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin: 0.3rem 0;">Gemini Synthesis</div>
+                <div style="font-size: 0.76rem; color: var(--text-muted);">Grounded answer + citations</div>
             </div>
         </div>
     </div>
