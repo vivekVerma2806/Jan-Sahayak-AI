@@ -3,12 +3,22 @@ import concurrent.futures
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-# Use the fastest practical model first and only fall back when needed.
+# Primary modern models and fallback chain verified against Google Generative AI API
 GEMINI_MODELS = [
+    "gemini-3.6-flash",
+    "gemini-3.5-flash-lite",
+    "gemini-3.8-flash",
+    "gemini-3.7-flash",
+    "gemini-3.5-flash",
+    "gemini-3.1-flash-lite",
+    "gemini-flash-latest",
+    "gemini-flash-lite-latest",
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
     "gemini-2.0-flash",
-    "gemini-2.0-flash-lite",
     "gemini-1.5-flash",
 ]
+
 
 RETRIEVAL_TIMEOUT = 20   # seconds before giving up on vector search
 
@@ -161,18 +171,11 @@ def generate_answer(query: str, retrieved_chunks: list, google_api_key: str) -> 
 
         except Exception as e:
             last_error = e
-            error_str = str(e).upper()
-            if "429" in str(e) or "RESOURCE_EXHAUSTED" in error_str or "RATE" in error_str or "404" in str(e) or "NOT_FOUND" in error_str:
-                print(f"Error on {model_name} ({type(e).__name__}), trying next model...")
-                continue
-            else:
-                return {
-                    "answer": f"⚠️ Gemini API error: {str(e)}",
-                    "sources": []
-                }
+            print(f"Error on model '{model_name}' ({type(e).__name__}): {e}. Trying next model in fallback list...")
+            continue
 
     return {
-        "answer": f"⚠️ All Gemini models timed out or are rate-limited. Please wait a moment and try again.\n\n_Details: {str(last_error)}_",
+        "answer": f"⚠️ All Gemini models failed or are currently unavailable. Please check your API key and try again.\n\n_Last Error Details: {str(last_error)}_",
         "sources": []
     }
 
