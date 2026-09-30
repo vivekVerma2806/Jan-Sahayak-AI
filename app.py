@@ -187,12 +187,15 @@ st.markdown(textwrap.dedent("""
     }
     .masthead-logo {
         display: block;
-        margin: 0 auto 0.8rem auto;
-        width: 90px;
-        height: 90px;
+        margin: 0 auto 0.6rem auto;
+        width: 110px;
+        height: 110px;
         object-fit: contain;
-        filter: grayscale(100%) contrast(1.1);
-        opacity: 0.92;
+        filter: grayscale(100%) contrast(1.15);
+        opacity: 0.90;
+        mix-blend-mode: multiply;
+        border: none;
+        background: transparent;
     }
     .masthead-meta {
         display: flex;
