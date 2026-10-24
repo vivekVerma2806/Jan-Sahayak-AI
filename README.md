@@ -1,13 +1,21 @@
-# JAN SAHAYAK (जन सहायक) 🤝
+# 🤝 Jan Sahayak AI (जन सहायक)
 ### *Public Policy Research Desk & Grounded AI Intelligence System*
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python: 3.11](https://img.shields.io/badge/Python-3.11-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![Framework: Streamlit](https://img.shields.io/badge/Framework-Streamlit_1.32+-FF4B4B.svg?logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![Orchestration: LangChain](https://img.shields.io/badge/Orchestration-LangChain_0.1+-1C3C3C.svg?logo=langchain&logoColor=white)](https://www.langchain.com/)
-[![Vector DB: ChromaDB](https://img.shields.io/badge/Vector_DB-ChromaDB_0.4+-orange.svg)](https://www.trychroma.com/)
-[![LLM: Google Gemini](https://img.shields.io/badge/LLM-Google_Gemini_3.6_Flash-4285F4.svg?logo=google&logoColor=white)](https://aistudio.google.com/)
-[![Embeddings: Local ONNX](https://img.shields.io/badge/Embeddings-all--MiniLM--L6--v2_(ONNX)-brightgreen.svg)](https://onnxruntime.ai/)
+[![LIVE DEMO STREAMLIT](https://img.shields.io/badge/LIVE_DEMO-STREAMLIT-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://jan-sahayak-ai.streamlit.app/)
+[![AI ENGINE GOOGLE GEMINI](https://img.shields.io/badge/AI_ENGINE-GOOGLE_GEMINI_3.6-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://aistudio.google.com/)
+[![ORCHESTRATION LANGCHAIN](https://img.shields.io/badge/ORCHESTRATION-LANGCHAIN-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)](https://www.langchain.com/)
+[![VECTOR DB CHROMADB](https://img.shields.io/badge/VECTOR_DB-CHROMADB-FC521F?style=for-the-badge)](https://www.trychroma.com/)
+
+[![EMBEDDINGS LOCAL ONNX](https://img.shields.io/badge/EMBEDDINGS-LOCAL_ONNX_MiniLM-00599C?style=for-the-badge&logo=onnx&logoColor=white)](https://onnxruntime.ai/)
+[![PYTHON 3.11](https://img.shields.io/badge/PYTHON-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![UI THEME EDITORIAL](https://img.shields.io/badge/UI_THEME-EDITORIAL_GAZETTE-EDEAE4?style=for-the-badge&labelColor=111111&color=EDEAE4)](https://jan-sahayak-ai.streamlit.app/)
+[![LICENSE MIT](https://img.shields.io/badge/LICENSE-MIT-yellow?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+### *Empowering Citizens with Grounded, Zero-Hallucination Policy Intelligence.*
+
+A production-ready, citation-backed Public Policy Intelligence platform combining local CPU ONNX vector embeddings, persistent ChromaDB indexing, a 12-model Google Gemini fallback cascade, and zero-hallucination grounded verification for Indian government welfare schemes.
+
+[Live Application](https://jan-sahayak-ai.streamlit.app/) • [System Architecture](#6-system-architecture) • [Database Design](#8-database-design) • [Core Workflows](#9-core-workflows) • [API Documentation](#10-api--interface-documentation) • [Interview Walkthrough](#21-interview-preparation-section)
 
 ---
 
@@ -79,8 +87,8 @@
 
 ## 2. Live Demo and Project Links
 
+* **Live Deployed Application**: [Streamlit](https://jan-sahayak-ai.streamlit.app/) *(Hosted on Streamlit Community Cloud)*
 * **GitHub Repository**: [https://github.com/vivekVerma2806/Jan-Sahayak-AI](https://github.com/vivekVerma2806/Jan-Sahayak-AI)
-* **Live Deployed Application**: `[Add verified live deployment URL — e.g. https://jan-sahayak-ai.streamlit.app]` *(Configured for instant one-click deployment on Streamlit Community Cloud)*
 * **Embedded System Documentary Video**: [YouTube Tutorial Link](https://www.youtube-nocookie.com/embed/h2aWGlSVr98) *(Embedded natively in the System Methodology tab of the application)*
 * **Local Video Simulation Asset**: `uploads/demo_video.mp4` *(Generated automatically via `generate_dummy_assets.py`)*
 
